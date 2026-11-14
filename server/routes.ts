@@ -1,3 +1,4 @@
+import { registerReportRoutes } from "./reports";
 import type { Express, Request } from "express";
 import type { Server } from "node:http";
 import crypto from "node:crypto";
@@ -368,6 +369,8 @@ export async function registerRoutes(
     return true;
   };
 
+  registerReportRoutes(app, requireAdmin);
+
   app.post("/api/admin/login", (req, res) => {
     if (!ADMIN_ENABLED) {
       return res.status(503).json({ error: "The lead log is not configured on this deployment." });
@@ -467,3 +470,4 @@ export async function registerRoutes(
 
   return httpServer;
 }
+

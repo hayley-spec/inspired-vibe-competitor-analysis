@@ -1,3 +1,4 @@
+import { AdminReports } from "@/components/admin-reports";
 import { useEffect, useState } from "react";
 import { API_BASE } from "@/lib/queryClient";
 import { Download, Lock, LogOut, RefreshCw, ArrowLeft, Phone, Mail } from "lucide-react";
@@ -312,6 +313,7 @@ export default function Leads() {
       </header>
 
       <main className="mx-auto max-w-[1440px] px-5 py-12">
+        {authed && <AdminReports authFetch={authFetch} />}
         {checking ? (
           <div className="mx-auto max-w-md rounded-xl border border-border/60 bg-card p-8">
             <div className="h-4 w-24 animate-pulse rounded bg-muted" />
@@ -677,3 +679,4 @@ export default function Leads() {
     </div>
   );
 }
+

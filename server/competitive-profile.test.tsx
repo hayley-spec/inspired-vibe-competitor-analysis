@@ -4,9 +4,10 @@ import assert from 'node:assert/strict';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { CompetitiveProfile, ProcessingComparison } from '../client/src/components/competitive-profile';
 const noop = () => {};
-test('Step 4 has exactly two URL inputs with accessible labels and approved CTA', () => {
+test('Step 4 has two URL inputs and a third email field with accessible labels and approved CTA', () => {
  const html = renderToStaticMarkup(<CompetitiveProfile ownUrl="" competitorUrl="" onOwnUrlChange={noop} onCompetitorUrlChange={noop} onSubmit={noop} isPending={false} />);
- assert.equal((html.match(/<input /g) || []).length, 2);
+ assert.equal((html.match(/<input /g) || []).length, 3);
+ assert.equal((html.match(/type="email"/g) || []).length, 1);
  assert.ok(html.includes('Your Company’s Website'));
  assert.ok(html.includes('Competitor’s Website'));
  assert.ok(html.includes('Compare My Company'));
@@ -24,3 +25,4 @@ test('validation error retains form, processing shows two websites with no simul
  assert.ok(processing.replace(/<[^>]+>/g, '').includes('Comparing your company and your selected competitor…'));
  assert.ok(!processing.includes('<form'));
 });
+

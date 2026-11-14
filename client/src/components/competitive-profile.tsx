@@ -3,6 +3,9 @@ import { ArrowRight, LoaderCircle } from "lucide-react";
 import { VisibilityLogo, VisibilityStar } from "./visibility-brand";
 
 export interface CompetitiveProfileProps {
+  emailEnabled?: boolean;
+  email?: string;
+  onEmailChange?: (value:string)=>void;
   ownUrl: string;
   competitorUrl: string;
   onOwnUrlChange: (value: string) => void;
@@ -73,7 +76,7 @@ export function CompetitiveProfile(props: CompetitiveProfileProps) {
     <form onSubmit={onSubmit} noValidate>
       <section className="mx-auto max-w-6xl px-6 py-10 sm:px-10 sm:py-14">
         <h2 className="text-lg font-semibold">Start with both websites.</h2>
-        <p className="mt-2 text-sm text-slate-500">Only the two website fields are required.</p>
+        <p className="mt-2 text-sm text-slate-500">Enter both websites and your report contact email.</p>
         <div data-testid="website-input-sections" className="mt-10 grid grid-cols-1 gap-10 md:gap-16">
           <section className="flex flex-col border-t-[3px] pt-5" style={{ borderColor: navy }}>
             <h3 className="text-3xl font-bold uppercase" style={heading}>Your company</h3>
@@ -98,6 +101,11 @@ export function CompetitiveProfile(props: CompetitiveProfileProps) {
             </div>
           </section>
         </div>
+        <div className="mt-10 border-t-[3px] pt-5">
+          <label htmlFor="report-email" className="text-sm font-semibold">Email for your report *</label>
+          <input id="report-email" type="email" autoComplete="email" required maxLength={254} value={props.email || ""} onChange={e=>props.onEmailChange?.(e.target.value)} className={inputClass} placeholder="you@company.com" />
+          <p className="mt-3 text-xs text-slate-500">{props.emailEnabled ? "We’ll use this address to deliver your requested analysis PDF." : "Email delivery is not active yet. You can view your analysis here, and the team can retrieve your saved PDF; it will not be emailed automatically later."}</p>
+        </div>
         {error && <p role="alert" className="mt-8 rounded border border-red-300 bg-red-50 p-4 text-sm text-red-800">{error}</p>}
       </section>
       <section className="px-6 py-12 text-center text-white sm:px-10" style={{ background: navy }}>
@@ -119,3 +127,4 @@ export function CompetitiveProfile(props: CompetitiveProfileProps) {
     </section>
   </main>;
 }
+
