@@ -87,7 +87,7 @@ app.use((req, res, next) => {
 
   // Routes whose responses may carry contact details or credentials. These
   // get status lines only — never a body — so PII never reaches the logs.
-  const SENSITIVE = ["/api/lead", "/api/admin", "/api/leads", "/api/contacts"];
+  const SENSITIVE = ["/api/reports", "/api/lead", "/api/admin", "/api/leads", "/api/contacts"];
 
   res.on("finish", () => {
     const duration = Date.now() - start;
@@ -123,5 +123,6 @@ app.use((req, res, next) => {
 
   return { app, httpServer };
 }
+
 
 
