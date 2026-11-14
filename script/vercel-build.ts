@@ -8,6 +8,7 @@ await build({
   target: 'node22',
   format: 'cjs',
   bundle: true,
-  external: ['better-sqlite3', 'pg-native'],
+  external: ['better-sqlite3', 'pg-native', 'pdfkit'],
   define: { 'process.env.NODE_ENV': '"production"' },
 });
+
